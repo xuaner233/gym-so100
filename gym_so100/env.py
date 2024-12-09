@@ -4,21 +4,21 @@ from dm_control import mujoco
 from dm_control.rl import control
 from gymnasium import spaces
 
-from gym_aloha.constants import (
+from gym_so100.constants import (
     ACTIONS,
     ASSETS_DIR,
     DT,
     JOINTS,
 )
-from gym_aloha.tasks.sim import BOX_POSE, InsertionTask, TransferCubeTask
-from gym_aloha.tasks.sim_end_effector import (
+from gym_so100.tasks.sim import BOX_POSE, InsertionTask, TransferCubeTask
+from gym_so100.tasks.sim_end_effector import (
     InsertionEndEffectorTask,
     TransferCubeEndEffectorTask,
 )
-from gym_aloha.utils import sample_box_pose, sample_insertion_pose
+from gym_so100.utils import sample_box_pose, sample_insertion_pose
 
 
-class AlohaEnv(gym.Env):
+class SO100Env(gym.Env):
     # TODO(aliberts): add "human" render_mode
     metadata = {"render_modes": ["rgb_array"], "render_fps": 50}
 
