@@ -1,9 +1,9 @@
 # gym-so100
 
-A gym environment for [SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100), which is derived from [gym-aloha](https://github.com/huggingface/gym-aloha)
+A gym environment for [SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100).
 
 ## TODO: Update GIF for SO-ARM100 robot.
-<img src="http://remicadene.com/assets/gif/aloha_act.gif" width="50%" alt="ACT policy on ALOHA env"/>
+<img src="http://remicadene.com/assets/gif/aloha_act.gif" width="50%" alt="ACT policy on SO100 env"/>
 
 
 ## Installation
@@ -15,7 +15,7 @@ conda create -y -n so100 python=3.10 && conda activate so100
 
 Install gym-so100:
 ```bash
-pip install gym-so100
+pip install -e .
 ```
 
 

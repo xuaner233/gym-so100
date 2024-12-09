@@ -3,7 +3,7 @@ import gymnasium as gym
 import numpy as np
 import gym_so100
 
-env = gym.make("gym_so100/So100Insertion-v0")
+env = gym.make("gym_so100/SO100Insertion-v0")
 observation, info = env.reset()
 frames = []
 

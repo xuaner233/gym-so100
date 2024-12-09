@@ -9,7 +9,7 @@ readme = "README.md"
 license = "Apache-2.0"
 keywords = ["robotics", "deep", "reinforcement", "learning", "so100", "environment", "gym", "gymnasium", "dm-control", "mujoco"]
 classifiers=[
-    "Development Status :: 0 - Alpha",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Build Tools",
     "License :: OSI Approved :: Apache Software License",

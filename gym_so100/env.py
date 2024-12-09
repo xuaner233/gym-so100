@@ -9,6 +9,7 @@ from gym_so100.constants import (
     ASSETS_DIR,
     DT,
     JOINTS,
+    START_ARM_POSE,
 )
 from gym_so100.tasks.sim import BOX_POSE, InsertionTask, TransferCubeTask
 from gym_so100.tasks.sim_end_effector import (
@@ -42,6 +43,9 @@ class SO100Env(gym.Env):
         self.visualization_height = visualization_height
 
         self._env = self._make_env_task(self.task)
+
+        # check if end effector task
+        self.is_ee_task = True if self.task.startswith("end_effector_") else False
 
         if self.obs_type == "state":
             raise NotImplementedError()
@@ -83,7 +87,11 @@ class SO100Env(gym.Env):
                 }
             )
 
-        self.action_space = spaces.Box(low=-1, high=1, shape=(len(ACTIONS),), dtype=np.float32)
+        if self.is_ee_task:
+            # Define the action space for EE tasks
+            self.action_space = spaces.Box(low=-1, high=1, shape=(len(START_ARM_POSE),), dtype=np.float32)
+        else:
+            self.action_space = spaces.Box(low=-1, high=1, shape=(len(ACTIONS),), dtype=np.float32)
 
     def render(self):
         return self._render(visualize=True)
@@ -118,12 +126,10 @@ class SO100Env(gym.Env):
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionTask()
         elif task_name == "end_effector_transfer_cube":
-            raise NotImplementedError()
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_transfer_cube.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = TransferCubeEndEffectorTask()
         elif task_name == "end_effector_insertion":
-            raise NotImplementedError()
             xml_path = ASSETS_DIR / "bimanual_viperx_end_effector_insertion.xml"
             physics = mujoco.Physics.from_xml_path(str(xml_path))
             task = InsertionEndEffectorTask()
@@ -160,6 +166,9 @@ class SO100Env(gym.Env):
             BOX_POSE[0] = sample_box_pose(seed)  # used in sim reset
         elif self.task == "insertion":
             BOX_POSE[0] = np.concatenate(sample_insertion_pose(seed))  # used in sim reset
+        elif self.is_ee_task:
+            # TODO(xuan): implement this
+            pass
         else:
             raise ValueError(self.task)
 
