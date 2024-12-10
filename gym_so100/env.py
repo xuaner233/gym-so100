@@ -45,7 +45,7 @@ class SO100Env(gym.Env):
         self._env = self._make_env_task(self.task)
 
         # check if end effector task
-        self.is_ee_task = True if self.task.startswith("end_effector_") else False
+        self.is_ee_task = bool(self.task.startswith("end_effector_"))
 
         if self.obs_type == "state":
             raise NotImplementedError()
