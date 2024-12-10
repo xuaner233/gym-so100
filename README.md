@@ -2,8 +2,7 @@
 
 A gym environment for [SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100).
 
-## TODO: Update GIF for SO-ARM100 robot.
-<img src="http://remicadene.com/assets/gif/aloha_act.gif" width="50%" alt="ACT policy on SO100 env"/>
+<img src="./example_episode_0.gif" width="50%" alt="ACT SO100EEInsertion-v0 policy on SO100 env"/>
 
 
 ## Installation
@@ -20,6 +19,8 @@ pip install -e .
 
 
 ## Quickstart
+
+### 1. Check the environment
 
 ```python
 # example.py
@@ -44,7 +45,11 @@ for _ in range(1000):
 env.close()
 imageio.mimsave("example.mp4", np.stack(frames), fps=25)
 ```
+### 2. Run the example script
 
+```bash
+python scripted_sim_example.py
+```
 
 ## Description
 SO100 *(aka. SO-ARM100)* environment.

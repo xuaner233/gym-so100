@@ -87,8 +87,21 @@ class SO100Env(gym.Env):
                 }
             )
 
+        # Add mocap_pose for ee tasks
         if self.is_ee_task:
-            # Define the action space for EE tasks
+            self.observation_space["mocap_pose_left"] = spaces.Box(
+                low=-1000.0, high=1000.0, shape=(7,), dtype=np.float64
+            )
+            self.observation_space["mocap_pose_right"] = spaces.Box(
+                low=-1000.0, high=1000.0, shape=(7,), dtype=np.float64
+            )
+            env_state_dim = 7 if "transfer_cube" in self.task else 14
+            self.observation_space["env_state"] = spaces.Box(
+                low=-1000.0, high=1000.0, shape=(env_state_dim,), dtype=np.float64
+            )
+
+        # Define the action space
+        if self.is_ee_task:
             self.action_space = spaces.Box(low=-1, high=1, shape=(len(START_ARM_POSE),), dtype=np.float32)
         else:
             self.action_space = spaces.Box(low=-1, high=1, shape=(len(ACTIONS),), dtype=np.float32)
@@ -151,6 +164,12 @@ class SO100Env(gym.Env):
                 "pixels": {"top": raw_obs["images"]["top"].copy()},
                 "agent_pos": raw_obs["qpos"],
             }
+
+        if self.is_ee_task:
+            obs["mocap_pose_left"] = raw_obs["mocap_pose_left"].copy()
+            obs["mocap_pose_right"] = raw_obs["mocap_pose_right"].copy()
+            obs["env_state"] = raw_obs["env_state"].copy()
+
         return obs
 
     def reset(self, seed=None, options=None):
