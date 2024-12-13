@@ -32,6 +32,7 @@ class BimanualTask(base.Task):
         super().__init__(random=random)
 
     def before_step(self, action, physics: Physics):
+        """ Pre process action before simulation step """
         super().before_step(action, physics)
 
     def initialize_robots(self, physics: Physics):

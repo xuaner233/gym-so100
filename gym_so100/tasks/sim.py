@@ -41,6 +41,7 @@ class BimanualSO100Task(BimanualTask):
         right_arm_action[-1] = unnormalize_puppet_gripper_joint(right_arm_action[-1])
 
         env_action = np.concatenate([left_arm_action, right_arm_action])
+        super().before_step(env_action, physics)
 
     def initialize_episode(self, physics):
         """Sets the state of the environment at the start of each episode."""
