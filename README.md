@@ -115,7 +115,7 @@ The arms at home position and the items (block, peg, socket) start at a random p
 * `visualization_height`: (int) The height of the visualized image. Default is `480`.
 
 
-# LeRobot Dataset Creation
+## LeRobot Dataset Creation
 
 ```bash
 # 1. clone lerobot repo and install lerobot env, note: `pip install lerobot` do not include `LeRobotDataset` module
