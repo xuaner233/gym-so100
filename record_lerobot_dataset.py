@@ -132,6 +132,7 @@ def record_dataset(num_episodes: int, user_id: str, env_name: str, policy_cls, *
                 break
         else:
             print(f"{episode_idx=} Failed, last saved successful episode count {dataset.num_episodes}")
+            dataset.image_writer.wait_until_done()
             dataset.clear_episode_buffer()
 
     dataset.consolidate()
